@@ -1,0 +1,51 @@
+version: '3.3'
+services:
+  nodepeesco:
+    container_name: nodejs
+    restart: always
+    build: ./
+    ports:
+      - 5000:3000
+    links:
+      - mongopeesco
+      - redispeesco
+      - postgres
+    volumes:
+      - .:/usr/src/app
+  mongopeesco:
+    container_name: mongoPeesco
+    image: mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: peescoCrudo
+      MONGO_INITDB_ROOT_PASSWORD: P335c0_Crud05
+    ports:
+      - 27018:27017
+    volumes:
+      - ./mongo_data:/data/db
+  redispeesco: 
+    container_name: "redis-Peesco"
+    image:  redis:alpine
+    restart: always
+    command: redis-server /usr/local/etc/redis/redis.conf --requirepass P335c0_Crud05
+    ports:
+      - 6379:6379
+    volumes:
+      - ./redis.conf:/usr/local/etc/redis/redis.conf
+  postgres:
+    image: postgres:13
+    environment:
+      - POSTGRES_DB=crudos
+      - POSTGRES_USER=peescoCrudo
+      - POSTGRES_PASSWORD=P335c0_Crud05
+    ports:
+      - 5432:5432
+    volumes:
+      - ./postgres_data:/var/lib/postgresql/data
+
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@peesco.com
+      - PGADMIN_DEFAULT_PASSWORD=P335c0_Crud05
+    ports:
+      - 8080:80
