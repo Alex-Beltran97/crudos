@@ -3,49 +3,48 @@ const { Model, DataTypes, Sequelize } = require("sequelize")
 const USER_TABLE = "users"
 
 const UserSchema = {
-  id:{
+  id: {
     allowNull: false,
     autoIncrement: true,
     primaryKey: true,
-    type: DataTypes.INTEGER
+    type: DataTypes.INTEGER,
   },
-  idOperativo:{
+  idOperativo: {
     allowNull: false,
     type: DataTypes.INTEGER,
-    unique: true
+    unique: true,
   },
-  cedula:{
+  cedula: {
     allowNull: false,
-    type:DataTypes.DOUBLE,
-    unique: true
+    type: DataTypes.DOUBLE,
+    unique: true,
   },
-  name:{
+  name: {
     allowNull: false,
-    type:DataTypes.STRING
+    type: DataTypes.STRING,
   },
-  lastname:{
+  lastname: {
     allowNull: false,
-    type:DataTypes.STRING
+    type: DataTypes.STRING,
   },
-  cargo:{
+  cargo: {
     allowNull: false,
-    type:DataTypes.STRING
+    type: DataTypes.STRING,
   },
-  phone:{
+  phone: {
     allowNull: false,
-    type:DataTypes.DOUBLE,
-    unique: true
+    type: DataTypes.DOUBLE,
+    unique: true,
   },
   createdAt: {
     allowNull: false,
     type: DataTypes.DATE,
-    field: 'create_at',
-    defaultValue: Sequelize.NOW
-  }
-
+    field: "create_at",
+    defaultValue: Sequelize.NOW,
+  },
 }
 
-class User extends Model{
+class Users extends Model {
   static associate() {
     // associate
   }
@@ -53,10 +52,10 @@ class User extends Model{
     return {
       sequelize,
       tableName: USER_TABLE,
-      modelName: 'User',
-      timestamps: false
+      modelName: "User",
+      timestamps: false,
     }
   }
 }
 
-module.exports = {USER_TABLE, UserSchema, User}
+module.exports = { USER_TABLE, UserSchema, Users }

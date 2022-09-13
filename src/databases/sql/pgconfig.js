@@ -12,16 +12,7 @@ const sequelize = new Sequelize(URI, {
   logging: true,
 })
 
-const dbconnectionSql = async () => {
-  try {
-    await sequelize.authenticate()
-    console.log("Postgres connection")
-  } catch (e) {
-    console.error(e.message, "Failed conection a db Sql")
-  }
-}
-
 setupModels(sequelize)
 sequelize.sync()
 
-module.exports = { sequelize, dbconnectionSql }
+module.exports = sequelize
