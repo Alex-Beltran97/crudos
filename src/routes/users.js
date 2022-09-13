@@ -7,9 +7,10 @@ router.get("/", async (req, res) => {
   res.send(users) 
 })
 
-router.post("/", (req, res) => {
+router.post("/", async (req, res) => {
   let { body } = req
-  res.json(body)
+  let users = await create(body)
+  res.send(users)
 })
 
 module.exports = router

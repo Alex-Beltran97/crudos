@@ -5,6 +5,9 @@ let find = async () => {
   return results
 }
 
-let create = async () => {}
+let create = async (body) => {
+  const result = await models.User.create(body)
+  return result
+}
 
 module.exports = { find, create }
