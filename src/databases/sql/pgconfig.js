@@ -1,6 +1,6 @@
 const { Sequelize } = require("sequelize")
 
-const { config } = require("./../config/config")
+const { config } = require("../../config/config")
 const setupModels = require("../../models/sql")
 
 const USER = encodeURIComponent(config.dbUserPg)
@@ -12,7 +12,16 @@ const sequelize = new Sequelize(URI, {
   logging: true,
 })
 
+const dbconnectionSql = async () => {
+  try {
+    await sequelize.authenticate()
+    console.log("Postgres connection")
+  } catch (e) {
+    console.error(e.message, "Failed conection a db Sql")
+  }
+}
+
 setupModels(sequelize)
 sequelize.sync()
 
-module.exports = sequelize
+module.exports = { sequelize, dbconnectionSql }
