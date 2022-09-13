@@ -1,9 +1,10 @@
-require("dotenv").config()
 const express = require("express")
 const cors = require("cors")
 const app = express()
-const port = process.env.PORT || 3000
+const { config } = require("./config/config")
+const port = config.port || 3000
 
+require('./databases/nosql/mongo')
 app.use(cors())
 app.use(express.json())
 
