@@ -1,7 +1,7 @@
 const express = require("express")
 const router = express.Router()
 const { create, find } = require("../controllers/users.controller")
-const google = require("../spreadsheet")
+const google = require("../spreadsheet/register")
 
 router.get("/", async (req, res) => {
   let users = await find()
