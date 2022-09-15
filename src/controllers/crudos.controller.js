@@ -23,6 +23,9 @@ const find = async (res) => {
 const create = async (data, res) => {
   try {
     user = await models.User.findAll({ where: { cedula: data.cedula } })
+    if (!user) {
+      handleHttpError(res, "user not found")
+    }
     let body = {
       idUser: user[0].id,
       dateAndTime: data.dateAndTime,
@@ -37,6 +40,7 @@ const create = async (data, res) => {
     }
     createCrudos = await crudos.create(body)
   } catch (e) {
+    createCrudos = { message: "error en la creacion", error: e.message }
     console.error(e.message, "error en la creacion")
     handleHttpError(res, "Failed creted crudos")
   }
