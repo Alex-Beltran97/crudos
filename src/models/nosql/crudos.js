@@ -6,13 +6,14 @@ const CrudosSchema = new mongoose.Schema(
       type: Number,
     },
     dateAndTime: {
-      type: Date,
+      type: String,
     },
     idLot: {
       type: String,
     },
     idRoll: {
       type: String,
+      unique: true
     },
     rollweight: {
       type: Number,
