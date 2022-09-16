@@ -21,29 +21,33 @@ const find = async (res) => {
 }
 
 const create = async (data, res) => {
-  try {
-    user = await models.User.findAll({ where: { cedula: data.cedula } })
-    if (!user) {
-      handleHttpError(res, "user not found")
+  let result = ""
+  data.forEach(async (e) => {
+    try {
+      user = await models.User.findAll({ where: { cedula: e.cedula } })
+      if (!user) {
+        handleHttpError(res, "user not found")
+      }
+      let body = {
+        idUser: user[0].id,
+        dateAndTime: e.dateAndTime,
+        idLot: e.idLot,
+        idRoll: e.idRoll,
+        rollweight: e.rollweight,
+        client: e.client,
+        referent: e.referent,
+        Weaving: e.Weaving,
+        referralNumber: e.referralNumber,
+        warehouseLocation: e.warehouseLocation,
+      }
+      createCrudos = await crudos.create(body)
+      result = { message: "success created" }
+    } catch (e) {
+      result = { message: "error en la creacion", error: e.message }
+      console.error(e.message, "error en la creacion")
     }
-    let body = {
-      idUser: user[0].id,
-      dateAndTime: data.dateAndTime,
-      idLot: data.idLot,
-      idRoll: data.idRoll,
-      rollweight: data.rollweight,
-      client: data.client,
-      referent: data.referent,
-      Weaving: data.Weaving,
-      referralNumber: data.referralNumber,
-      warehouseLocation: data.warehouseLocation,
-    }
-    createCrudos = await crudos.create(body)
-  } catch (e) {
-    createCrudos = { message: "error en la creacion", error: e.message }
-    console.error(e.message, "error en la creacion")
-  }
-  return createCrudos
+    return result
+  })
 }
 
 module.exports = { find, create }
