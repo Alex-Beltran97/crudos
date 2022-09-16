@@ -11,25 +11,23 @@ router.get("/", async (req, res) => {
 router.get("/create", async (req, res) => {
   let crudos = []
   let sheet = await google.accederGoogleSheet()
-  sheet.forEach((e)=>{
+  sheet.forEach((e) => {
     let body = {
-      cedula:sheet[0].Cédula,
+      cedula: sheet[0].Cédula,
       dateAndTime: e.Fecha_y_hora_de_ingreso,
       idLot: e.Id_totalizado_del_lote,
-      idRoll:e.Id_único_de_cada_rollo,
+      idRoll: e.Id_único_de_cada_rollo,
       rollweight: e.Peso_de_cada_rollo,
-      client:e.Cliente,
+      client: e.Cliente,
       referent: e.Referencia,
-      Weaving:e.Tejeduría,
+      Weaving: e.Tejeduría,
       referralNumber: e.Número_de_remisión,
-      warehouseLocation: e.Ubicación_Bodega
+      warehouseLocation: e.Ubicación_Bodega,
     }
     crudos.push(body)
   })
-  crudos.forEach(async(i)=>{
-    data = await create(i, res)
-  })
-  res.json({message:"create successfully"})
+  data = await create(crudos, res)
+  res.json(data)
 })
 
 module.exports = router
