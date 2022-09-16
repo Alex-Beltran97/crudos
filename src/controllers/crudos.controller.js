@@ -42,7 +42,6 @@ const create = async (data, res) => {
   } catch (e) {
     createCrudos = { message: "error en la creacion", error: e.message }
     console.error(e.message, "error en la creacion")
-    handleHttpError(res, "Failed creted crudos")
   }
   return createCrudos
 }
