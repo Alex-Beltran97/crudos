@@ -13,7 +13,7 @@ const CrudosSchema = new mongoose.Schema(
     },
     idRoll: {
       type: String,
-      unique: true
+      unique: true,
     },
     rollweight: {
       type: Number,
@@ -32,6 +32,10 @@ const CrudosSchema = new mongoose.Schema(
     },
     warehouseLocation: {
       type: String,
+    },
+    status: {
+      type: ["activo", "inactivo"],
+      default: "activo",
     },
   },
   {
