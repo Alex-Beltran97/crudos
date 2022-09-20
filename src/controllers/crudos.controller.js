@@ -7,7 +7,7 @@ const find = async (res) => {
   try {
     const data = await crudos.find({})
     all = data.map(async (e) => {
-      user = await models.User.findAll({ where: { id: e.idUser } })
+      user = await models.User.findAll({ where: { idOperativo: e.idOperativo } })
       return {
         crudos: e,
         user: user[0],
@@ -24,12 +24,12 @@ const create = async (data, res) => {
   let result = ""
   data.forEach(async (e) => {
     try {
-      user = await models.User.findAll({ where: { cedula: e.cedula } })
-      if (!user) {
-        handleHttpError(res, "user not found")
+      user = await models.User.findAll({ where: { idOperativo: e.idOperativo } })
+      if (user.length == 0) {
+        console.error("User Not Found")
       }
       let body = {
-        idUser: user[0].id,
+        idOperativo: user[0].idOperativo,
         dateAndTime: e.dateAndTime,
         idLot: e.idLot,
         idRoll: e.idRoll,

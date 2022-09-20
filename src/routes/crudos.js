@@ -13,7 +13,7 @@ router.get("/create", async (req, res) => {
   let sheet = await google.accederGoogleSheet()
   sheet.forEach((e) => {
     let body = {
-      cedula: sheet[0].Cédula,
+      idOperativo: sheet[0].IdOperario,
       dateAndTime: e.Fecha_y_hora_de_ingreso,
       idLot: e.Id_totalizado_del_lote,
       idRoll: e.Id_único_de_cada_rollo,

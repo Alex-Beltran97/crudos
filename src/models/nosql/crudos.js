@@ -2,7 +2,7 @@ const mongoose = require("mongoose")
 
 const CrudosSchema = new mongoose.Schema(
   {
-    idUser: {
+    idOperativo: {
       type: Number,
     },
     dateAndTime: {
@@ -34,8 +34,8 @@ const CrudosSchema = new mongoose.Schema(
       type: String,
     },
     status: {
-      type: ["activo", "inactivo"],
-      default: "activo",
+      type: Boolean,
+      default: true,
     },
   },
   {

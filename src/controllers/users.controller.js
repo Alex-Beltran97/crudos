@@ -9,7 +9,11 @@ let create = async (employees) => {
   try {
     await models.User.truncate()
     employees.forEach(async (e) => {
-      await models.User.create(e)
+      try{
+        await models.User.create(e)
+      }catch(e){
+        console.error(e.message, "Failed insertion users")
+      }
     })
     return { message: "se crearon los usuarios correctamente" }
   } catch (e) {
