@@ -1,6 +1,6 @@
 const express = require("express")
 const router = express.Router()
-const { find, create } = require("../controllers/crudos.controller")
+const { find, create, update } = require("../controllers/crudos.controller")
 const google = require("../spreadsheet/crudos")
 
 router.get("/", async (req, res) => {
@@ -27,6 +27,13 @@ router.get("/create", async (req, res) => {
     crudos.push(body)
   })
   data = await create(crudos, res)
+  res.json(data)
+})
+
+router.post("/", async (req, res) => {
+  let idRoll = req.body
+  let data = await update(idRoll)
+
   res.json(data)
 })
 

@@ -1,28 +1,28 @@
-const { crudos } = require("../models/nosql")
+const { ppicking } = require("../models/nosql")
 const { models } = require("../databases/sql/pgconfig")
 const { handleHttpError } = require("../utils/handleError")
 
-const find = async (res) => {
+const find = async () => {
   let all = []
   try {
-    const data = await crudos.find({ status: true })
+    const data = await ppicking.find({})
     all = data.map(async (e) => {
       user = await models.User.findAll({
         where: { idOperativo: e.idOperativo },
       })
       return {
-        crudos: e,
+        ppicking: e,
         user: user[0],
       }
     })
     let allData = await Promise.all(all).catch(console.error)
     return allData
   } catch (e) {
-    handleHttpError(res, "not found crudos")
+    handleHttpError(res, "not found picking")
   }
 }
 
-const create = async (data, res) => {
+const create = async (data) => {
   let result = ""
   data.forEach(async (e) => {
     try {
@@ -34,6 +34,8 @@ const create = async (data, res) => {
       }
       let body = {
         idOperativo: user[0].idOperativo,
+        idPicking: e.idPicking,
+        docDespa: e.docDespa,
         dateAndTime: e.dateAndTime,
         idLot: e.idLot,
         idRoll: e.idRoll,
@@ -44,7 +46,7 @@ const create = async (data, res) => {
         referralNumber: e.referralNumber,
         warehouseLocation: e.warehouseLocation,
       }
-      createCrudos = await crudos.create(body)
+      createCrudos = await ppicking.create(body)
       result = { message: "success created" }
     } catch (e) {
       result = { message: "error en la creacion", error: e.message }
