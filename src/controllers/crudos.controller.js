@@ -5,9 +5,11 @@ const { handleHttpError } = require("../utils/handleError")
 const find = async (res) => {
   let all = []
   try {
-    const data = await crudos.find({})
+    const data = await crudos.find({ status: true })
     all = data.map(async (e) => {
-      user = await models.User.findAll({ where: { idOperativo: e.idOperativo } })
+      user = await models.User.findAll({
+        where: { idOperativo: e.idOperativo },
+      })
       return {
         crudos: e,
         user: user[0],
@@ -24,7 +26,9 @@ const create = async (data, res) => {
   let result = ""
   data.forEach(async (e) => {
     try {
-      user = await models.User.findAll({ where: { idOperativo: e.idOperativo } })
+      user = await models.User.findAll({
+        where: { idOperativo: e.idOperativo },
+      })
       if (user.length == 0) {
         console.error("User Not Found")
       }
@@ -50,4 +54,22 @@ const create = async (data, res) => {
   })
 }
 
-module.exports = { find, create }
+const update = async (idRoll) => {
+  let uuid = await crudos.find({ idRoll: idRoll.id_roll })
+  if (uuid.length == 0) {
+    return false
+  }
+  uuid = uuid[0]._id
+  let body = {
+    status: false,
+  }
+  try {
+    const data = await crudos.findByIdAndUpdate(uuid, body)
+    return data
+  } catch (e) {
+    console.error(e.message, "failed updated")
+    return { message: "failed updated" }
+  }
+}
+
+module.exports = { find, create, update }
