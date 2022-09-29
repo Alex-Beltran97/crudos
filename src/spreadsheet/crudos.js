@@ -1,7 +1,7 @@
 const { GoogleSpreadsheet } = require("google-spreadsheet")
 const credenciales = require("../../json/credenciales.json")
 
-let googleId = "1Ps2swOsTEXexNh86CyH5qxSZOlx6gOigk9pXSsuGdTg"
+let googleId = "1eTdWqVmHT1WtCQ1esZ5-2APP3BokrIqFTmoQghHVAqo"
 
 async function accederGoogleSheet() {
   const document = new GoogleSpreadsheet(googleId)
