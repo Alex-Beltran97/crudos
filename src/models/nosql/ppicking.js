@@ -7,7 +7,6 @@ const PpickingSchema = new mongoose.Schema(
     },
     idPicking: {
       type: String,
-      unique: true,
     },
     docDespa: {
       type: Number,

@@ -1,7 +1,12 @@
 const express = require("express")
 const router = express.Router()
 const google = require("../spreadsheet/ppicking")
-const { create, find } = require("../controllers/picking.controller")
+const {
+  create,
+  find,
+  listPincking,
+  orderPicking,
+} = require("../controllers/picking.controller")
 
 router.get("/ppicking", async (req, res) => {
   let data = await find()
@@ -13,7 +18,7 @@ router.get("/ppicking/create", async (req, res) => {
   let sheet = await google.accederGoogleSheet()
   sheet.forEach((e) => {
     let body = {
-      idOperativo: sheet[0].Id_Operario,
+      idOperativo: sheet[0].ID_Operario,
       idPicking: e.ID_Picking,
       docDespa: e.cedula_despacahdor,
       dateAndTime: e.Fecha_hora_ingreso,
@@ -32,4 +37,25 @@ router.get("/ppicking/create", async (req, res) => {
   res.json(data)
 })
 
+router.get("/list", async (req, res) => {
+  let result = await listPincking()
+  if (result) {
+    res.json(result)
+  } else {
+    res.json({ message: "error en list de ip ppicking" }).status(500)
+  }
+})
+
+router.post("/order", async (req, res) => {
+  let id = req.body.orderPicking
+  if (!id) {
+    res.send({ message: "Se debe enviar una idppicking" })
+  }
+  let result = await orderPicking(id)
+  if (result) {
+    res.json(result)
+  } else {
+    res.json({ message: "error en list de ip ppicking" }).status(500)
+  }
+})
 module.exports = router

@@ -22,6 +22,29 @@ const find = async () => {
   }
 }
 
+const listPincking = async () => {
+  let all = []
+  try {
+    const data = await ppicking.find({})
+    data.forEach((e) => {
+      all.push(e.idPicking)
+    })
+    return all
+  } catch (e) {
+    console.error(e.message, "error en la lista de ppicking")
+  }
+}
+
+const orderPicking = async (id) => {
+  let all = []
+  try {
+    const data = await ppicking.find({ idPicking: id })
+    return data
+  } catch (e) {
+    console.error(e.message, "error en la lista de ppicking")
+  }
+}
+
 const create = async (data) => {
   let result = ""
   data.forEach(async (e) => {
@@ -74,4 +97,4 @@ const update = async (idRoll) => {
   }
 }
 
-module.exports = { find, create, update }
+module.exports = { find, create, update, listPincking, orderPicking }
