@@ -10,7 +10,7 @@ async function accederGoogleSheet() {
     const document = new GoogleSpreadsheet(googleId)
     await document.useServiceAccountAuth(credenciales)
     await document.loadInfo()
-    const sheet = document.sheetsByIndex[1]
+    const sheet = document.sheetsByIndex[0]
     let register = await sheet.getRows()
     return register
   } catch (e) {

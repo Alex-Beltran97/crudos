@@ -22,7 +22,7 @@ const PpickingSchema = new mongoose.Schema(
       unique: true,
     },
     rollweight: {
-      type: Number,
+      type: String,
     },
     client: {
       type: String,
