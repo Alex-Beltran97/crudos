@@ -29,10 +29,6 @@ const listPincking = async () => {
     data.forEach((e) => {
       all.push(e.idPicking)
     })
-    let hash = {}
-    all = all.filter((o) =>
-      hash[o] ? false : (hash[o] = true)
-    )
     return all
   } catch (e) {
     console.error(e.message, "error en la lista de ppicking")
