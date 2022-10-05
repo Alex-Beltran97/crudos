@@ -1,23 +1,18 @@
 const express = require("express")
 const router = express.Router()
 const google = require("../spreadsheet/ppicking")
-const googleP = require("../spreadsheet/picking")
+const googleP = require('../spreadsheet/picking')
 const {
   create,
   find,
   listPincking,
   orderPicking,
   createPicking,
-  findPiking,
+  findPicking,
 } = require("../controllers/picking.controller")
 
 router.get("/ppicking", async (req, res) => {
   let data = await find()
-  res.json(data)
-})
-
-router.get("/", async (req, res) => {
-  let data = await findPiking()
   res.json(data)
 })
 
@@ -87,6 +82,11 @@ router.get("/create", async (req, res) => {
     picking.push(body)
   })
   data = await createPicking(picking)
-  res.json({ message: "sucess", data })
+  res.json(data)
+})
+
+router.get('/',async (req, res)=>{
+  let data = await findPicking()
+  res.json(data)
 })
 module.exports = router

@@ -21,25 +21,6 @@ const find = async () => {
     handleHttpError(res, "not found picking")
   }
 }
-const findPiking = async () => {
-  let all = []
-  try {
-    const data = await picking.find({})
-    all = data.map(async (e) => {
-      user = await models.User.findAll({
-        where: { idOperativo: e.idOperativo },
-      })
-      return {
-        ppicking: e,
-        user: user[0],
-      }
-    })
-    let allData = await Promise.all(all).catch(console.error)
-    return allData
-  } catch (e) {
-    handleHttpError(res, "not found picking")
-  }
-}
 
 const listPincking = async () => {
   let all = []
@@ -117,8 +98,7 @@ const update = async (idRoll) => {
     return { message: "failed updated" }
   }
 }
-
-const createPicking = async (data) => {
+let createPicking = async (data) => {
   let result = ""
   data.forEach(async (e) => {
     try {
@@ -151,12 +131,32 @@ const createPicking = async (data) => {
   })
 }
 
+let findPicking = async () => {
+  let all = []
+  try {
+    const data = await picking.find({})
+    all = data.map(async (e) => {
+      user = await models.User.findAll({
+        where: { idOperativo: e.idOperativo },
+      })
+      return {
+        picking: e,
+        user: user[0],
+      }
+    })
+    let allData = await Promise.all(all).catch(console.error)
+    return allData
+  } catch (e) {
+    handleHttpError(res, "not found picking")
+  }
+}
+
 module.exports = {
   find,
   create,
   update,
   listPincking,
   orderPicking,
+  findPicking,
   createPicking,
-  findPiking,
 }

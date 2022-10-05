@@ -1,15 +1,12 @@
 const mongoose = require("mongoose")
 
-const PpickingSchema = new mongoose.Schema(
+const PickingSchema = new mongoose.Schema(
   {
     idOperativo: {
       type: Number,
     },
     idPicking: {
       type: String,
-    },
-    docDespa: {
-      type: Number,
     },
     dateAndTime: {
       type: String,
@@ -46,4 +43,4 @@ const PpickingSchema = new mongoose.Schema(
   }
 )
 
-module.exports = mongoose.model("ppicking", PpickingSchema)
+module.exports = mongoose.model("picking", PickingSchema)
