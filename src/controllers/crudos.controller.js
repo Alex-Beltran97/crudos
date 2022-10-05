@@ -32,16 +32,17 @@ const create = async (data, res) => {
       if (user.length == 0) {
         console.error("User Not Found")
       }
+      //TODO : corregir no enviar datos en blanco
       let body = {
         idOperativo: user[0].idOperativo,
         dateAndTime: e.dateAndTime,
-        idLot: e.idLot,
-        idRoll: e.idRoll,
+        idLot: e.idLot.trim(),
+        idRoll: e.idRoll.trim(),
         rollweight: e.rollweight,
-        client: e.client,
+        client: e.client.trim(),
         referent: e.referent,
-        Weaving: e.Weaving,
-        referralNumber: e.referralNumber,
+        Weaving: e.Weaving.trim(),
+        referralNumber: e.referralNumber.trim(),
         warehouseLocation: e.warehouseLocation,
       }
       createCrudos = await crudos.create(body)
@@ -57,7 +58,8 @@ const create = async (data, res) => {
 const update = async (idRoll) => {
   let uuid = await crudos.find({ idRoll: idRoll.id_roll })
   if (uuid.length == 0) {
-    return false
+    console.error({ message: "Id roll not found" })
+    return { message: "Id roll not found" }
   }
   uuid = uuid[0]._id
   let body = {
