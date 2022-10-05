@@ -56,10 +56,10 @@ const create = async (data, res) => {
 }
 
 const update = async (idRoll) => {
-  let uuid = await crudos.find({ idRoll: idRoll.id_roll })
+  let uuid = await crudos.find({ idRoll: idRoll.id_roll.trim() })
   if (uuid.length == 0) {
-    console.error({ message: "Id roll not found", id: idRoll.id_roll })
-    return { message: "Id roll not found", id: idRoll.id_roll }
+    console.error({ message: "Id roll not found", id: idRoll.id_roll.trim() })
+    return { message: "Id roll not found", id: idRoll.id_roll.trim() }
   }
   uuid = uuid[0]._id
   let body = {
