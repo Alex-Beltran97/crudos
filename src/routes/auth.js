@@ -12,7 +12,7 @@ router.post(
   validatorLogin,
   async (req, res) => {
     req = matchedData(req)
-    let data = await loginCtrl(req)
+    let data = await loginCtrl(req, res)
     res.send(data)
   }
 )
