@@ -10,7 +10,6 @@ require("./databases/nosql/mongo")
 app.use(morgan())
 app.use(cors())
 app.use(express.json())
-// TODO : hola que hace
 app.use("/api/v1", require("./routes"))
 
 app.listen(port, () =>
