@@ -7,7 +7,7 @@ const port = config.port || 3000
 // const { dbconnectionSql } = require("./databases/sql/pgconfig")
 
 require("./databases/nosql/mongo")
-app.use(morgan())
+// app.use(morgan())
 app.use(cors())
 app.use(express.json())
 app.use("/api/v1", require("./routes"))
