@@ -23,7 +23,7 @@ router.get("/ppicking/create", async (req, res) => {
     let body = {
       idOperativo: sheet[0].ID_Operario,
       idPicking: e.ID_Picking,
-      docDespa: e.cedula_despacahdor,
+      docDespa: e.cedula_despachador,
       dateAndTime: e.Fecha_hora_ingreso,
       idLot: e.Id_lote,
       idRoll: e.Id_rollo,
@@ -32,7 +32,7 @@ router.get("/ppicking/create", async (req, res) => {
       referent: e.Referencia,
       Weaving: e.Tejeduría,
       referralNumber: e.Número_de_remisión,
-      warehouseLocation: e.Ubicaión,
+      warehouseLocation: e.Ubicacion,
     }
     picking.push(body)
   })
