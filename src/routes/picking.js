@@ -68,7 +68,7 @@ router.get("/create", async (req, res) => {
   sheet.forEach((e) => {
     let body = {
       idOperativo: sheet[0].ID_Operario,
-      idPicking: e.Orden_de_Picking,
+      idPicking: sheet[0].Orden_de_Picking,
       dateAndTime: e.Fecha_hora_ingreso,
       idLot: e.Id_lote,
       idRoll: e.Id_rollo,
