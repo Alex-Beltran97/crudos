@@ -1,6 +1,10 @@
 version: '3.3'
 services:
   nodepeesco:
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
     container_name: nodejs
     restart: always
     build: ./

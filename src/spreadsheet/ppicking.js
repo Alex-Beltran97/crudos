@@ -3,8 +3,6 @@ const credenciales = require("../../json/credenciales.json")
 
 let googleId = "1GkHlu6h272ORLCump5BFrCxQKqkMv1Z72ZV5gureo3I"
 
-//TODO : agregar id sheet en env
-
 async function accederGoogleSheet() {
   try {
     const document = new GoogleSpreadsheet(googleId)
