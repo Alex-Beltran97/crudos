@@ -10,9 +10,9 @@ router.get("/", async (req, res) => {
 })
 
 router.get("/create", async (req, res) => {
-  let employee = []
+  // let employee = []
   let employees = await google.accederGoogleSheet()
-  employees.forEach(async (e) => {
+  let employee =employees.map(async (e) => {
     let passwd =await encrypt(e.Contrasenia) 
     let body = {
       idOperativo: e.IdOperario,
@@ -23,10 +23,11 @@ router.get("/create", async (req, res) => {
       cargo: e.Cargo,
       phone: e.Telefono,
     }
-    employee.push(body)
+    return body
   })
-  let users = await create(employee)
-  res.send(users)
+  let users =  await Promise.all(employee).catch(console.error)
+  let result = await create(users)
+  res.send(result)
 })
 
 module.exports = router
